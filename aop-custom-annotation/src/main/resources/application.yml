@@ -1,4 +1,13 @@
 spring:
+  sql:
+    init:
+      # app 시작 시 data.sql에 작성된 코드로 database를 초기화 하도록 지정
+      mode: always
+  h2:
+    console:
+      enabled: true
+      # h2 콘솔 경로 지정
+      path: /h2-console
   profiles:
     active: local
   jpa:
@@ -6,13 +15,18 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect # PostgreSQL? ?? Hibernate ?? ??
+        dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
     hibernate:
-      ddl-auto: update
+      naming:
+        # 네이밍 전략: 카멜 케이스 -> 스네이크 케이스로 변환
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+      ddl-auto: create
+    # 데이터베이스의 초기화를 지연키신다. true 설정 시 애플리케이션이 실행될 때 db를 초기화하지 않고 첫 데이터베이스 액세스 시 초기화를 수행한다.
+    defer-datasource-initialization: true
   datasource:
     hikari:
-      jdbc-url: jdbc:h2:mem://localhost/~/suadoosic;MODE=PostgreSQL # PostgreSQL ?? ??? ??
+      jdbc-url: jdbc:h2:mem:suadoosic
       username: sa
       password:
       driver-class-name: org.h2.Driver
