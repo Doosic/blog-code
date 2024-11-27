@@ -1,4 +1,4 @@
-package com.doosic.aopcustomannotation;
+package com.doosic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
