@@ -12,16 +12,11 @@ import lombok.NoArgsConstructor;
 public class Auth {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String authCd;
 
-    private Long authParent;
+    private String authParent;
 
     private String authName;
-
-    private Integer authLevel;
-
-    private Integer authOrder;
 
     @Enumerated(EnumType.STRING)
     private MenuTypeCode menuTypeCode;
